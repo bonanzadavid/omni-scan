@@ -284,7 +284,7 @@ export default function App() {
     if (view === 'home') {
         return (
             <div
-                className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-between p-6 relative overflow-hidden font-sans">
+                className="w-full min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden font-sans">
                 <style>
                     {
                         ` @keyframes blob {
@@ -323,13 +323,13 @@ export default function App() {
 
                 {/* Abstract Background Shapes */}
                 <div
-                    className="absolute top-0 left-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2 animate-blob">
+                    className="absolute top-0 left-0 w-64 h-64 md:w-96 md:h-96 lg:w-[600px] lg:h-[600px] bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2 animate-blob">
                 </div>
                 <div
-                    className="absolute top-0 right-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 translate-x-1/2 -translate-y-1/2 animate-blob animation-delay-2000">
+                    className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 lg:w-[600px] lg:h-[600px] bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 translate-x-1/2 -translate-y-1/2 animate-blob animation-delay-2000">
                 </div>
                 <div
-                    className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
+                    className="absolute -bottom-8 left-20 w-72 h-72 md:w-[500px] md:h-[500px] lg:w-[800px] lg:h-[800px] bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
                 </div>
 
 
@@ -338,7 +338,7 @@ export default function App() {
                     className="absolute top-6 right-6 z-50 p-2 bg-slate-800/50 backdrop-blur rounded-full
                             hover:bg-slate-700 transition-colors"
                 >
-                    <Settings size={20} className="text-slate-300" />
+                    <Settings className="w-6 h-6 md:w-10 md:h-10 text-slate-300" />
                 </button>
 
 
@@ -347,7 +347,7 @@ export default function App() {
                     <div
                         className="absolute inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
                         <div
-                            className="bg-slate-800 p-6 rounded-2xl w-full max-w-sm border border-slate-700 shadow-xl">
+                            className="bg-slate-800 p-8 rounded-3xl w-full max-w-md border border-slate-700 shadow-xl">
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="font-bold text-lg">App Settings</h3>
                                 <button onClick={() => setShowSettings(false)}>
@@ -381,24 +381,24 @@ export default function App() {
                 )}
 
 
-                <div className="z-10 w-full max-w-md flex flex-col h-full">
-                    <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
+                <div className="z-10 w-full max-w-md md:max-w-4xl lg:max-w-6xl flex flex-col h-full items-center">
+                    <div className="flex-1 flex flex-col justify-center items-center text-center space-y-12 md:space-y-20 py-12">
                         <div className="relative">
                             <div
                                 className="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-purple-500 blur-lg opacity-75 rounded-full">
                             </div>
                             <div
-                                className="relative bg-slate-800 p-6 rounded-full border border-slate-700 shadow-2xl">
-                                <ScanLine size={48} className="text-indigo-400" />
+                                className="relative bg-slate-800 p-8 md:p-12 lg:p-16 rounded-full border border-slate-700 shadow-2xl">
+                                <ScanLine className="w-16 h-16 md:w-32 md:h-32 lg:w-48 lg:h-48 text-indigo-400" />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <h1
-                                className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+                                className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
                                 OmniScan AI
                             </h1>
-                            <p className="text-slate-400 text-lg">
+                            <p className="text-slate-400 text-lg md:text-3xl lg:text-4xl max-w-2xl mx-auto">
                                 Identify anything instantly & find real prices.
                             </p>
                         </div>
@@ -407,8 +407,8 @@ export default function App() {
 
                     <div className="space-y-4 mb-8">
                         <button onClick={startCamera}
-                            className="w-full group bg-white text-slate-900 py-4 px-6 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 active:scale-95">
-                            <Camera className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                            className="w-full max-w-md md:max-w-xl group bg-white text-slate-900 py-5 md:py-8 px-8 rounded-2xl md:rounded-[2rem] font-black text-xl md:text-3xl shadow-2xl hover:shadow-indigo-500/20 hover:bg-slate-50 transition-all flex items-center justify-center gap-4 active:scale-95">
+                            <Camera className="w-8 h-8 md:w-12 md:h-12 group-hover:scale-110 transition-transform" />
                             Start AI Scan
                         </button>
                         <p
@@ -486,7 +486,7 @@ export default function App() {
                     {/* Scanning Overlay */}
                     {!isScanning && !cameraError && !errorMessage && (
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-72 h-72 border-2 border-white/50 rounded-3xl relative">
+                            <div className="w-72 h-72 md:w-96 md:h-96 border-2 border-white/50 rounded-3xl relative">
                                 <div
                                     className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-indigo-500 -mt-1 -ml-1 rounded-tl-lg">
                                 </div>
@@ -535,7 +535,7 @@ export default function App() {
                     {isScanning && !errorMessage && (
                         <div
                             className="absolute inset-0 z-10 bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center">
-                            <div className="w-72 h-72 relative">
+                            <div className="w-72 h-72 md:w-96 md:h-96 relative">
                                 <div
                                     className="absolute inset-0 border-2 border-indigo-500/50 rounded-3xl animate-pulse">
                                 </div>
@@ -567,15 +567,14 @@ export default function App() {
                     )}
                 </div>
 
-
                 {/* Bottom Controls */}
-                <div className="h-32 bg-slate-900 flex items-center justify-center px-8 relative z-20">
+                <div className="h-32 md:h-48 bg-slate-900 flex items-center justify-center px-8 relative z-20">
                     {!isScanning && !errorMessage && (
                         <button onClick={handleScan}
-                            className="w-20 h-20 rounded-full border-4 border-white/20 p-1 flex items-center justify-center transition-all hover:scale-105 active:scale-95 group">
+                            className="w-20 h-20 md:w-28 md:h-28 rounded-full border-4 border-white/20 p-1 flex items-center justify-center transition-all hover:scale-105 active:scale-95 group">
                             <div
                                 className="w-full h-full bg-white rounded-full flex items-center justify-center group-hover:bg-indigo-50">
-                                <Search className="text-slate-900 w-8 h-8" />
+                                <Search className="text-slate-900 w-8 h-8 md:w-12 md:h-12" />
                             </div>
                         </button>
                     )}
@@ -591,97 +590,112 @@ export default function App() {
 
         return (
             <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
-                {/* Header Image */}
-                <div className="h-72 w-full relative bg-slate-200 group">
-                    <img src={result.image} alt={result.name} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors">
-                    </div>
-                    <button onClick={resetApp}
-                        className="absolute top-4 left-4 p-2 bg-white/80 backdrop-blur rounded-full shadow-sm hover:bg-white z-20">
-                        <ArrowRight className="rotate-180 w-5 h-5 text-slate-700" />
-                    </button>
-
-                    <div
-                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 pt-24 z-20">
-                        <div className="flex justify-between items-start mb-1">
-                            <span className={`text-white text-xs font-bold px-2 py-1 rounded mb-2 inline-flex
-                                        items-center gap-1 ${isAiPowered ? 'bg-indigo-500' : 'bg-green-500'}`}>
-                                {isAiPowered &&
-                                    <Sparkles size={10} />}
-                                {result.confidence} MATCH
-                            </span>
-                            {isAiPowered && (
-                                <span className="text-indigo-200 text-xs font-mono uppercase tracking-wider">
-                                    AI Analyzed
-                                </span>
-                            )}
+                <div className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full">
+                    {/* Header Image Side */}
+                    <div className="h-72 md:h-screen md:w-1/2 relative bg-slate-200 group sticky top-0">
+                        <img src={result.image} alt={result.name} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors">
                         </div>
-                        <h2 className="text-white text-3xl font-bold leading-tight drop-shadow-sm">{result.name}
-                        </h2>
-                        <p className="text-slate-200 text-lg font-medium">{result.brand}</p>
-                    </div>
-                </div>
-
-
-                {/* Content */}
-                <div className="flex-1 p-6 -mt-6 rounded-t-3xl bg-slate-50 relative z-10 flex flex-col gap-6">
-
-                    {/* Average Price Card */}
-                    <div
-                        className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
-                        <div>
-                            <p className="text-sm text-slate-500 mb-1">Estimated Market Value</p>
-                            <p className="text-2xl font-bold text-slate-900">{result.price}</p>
-                        </div>
-                        <div className="h-10 w-10 bg-indigo-50 rounded-full flex items-center justify-center">
-                            <ShoppingBag className="text-indigo-600 w-5 h-5" />
-                        </div>
-                    </div>
-
-
-                    {/* Retailers List */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                            Find Online <span
-                                className="text-xs font-normal text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{realLinks.length}</span>
-                        </h3>
-                        <div className="space-y-3">
-                            {realLinks.map((link, idx) => (
-                                <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer"
-                                    className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between group cursor-pointer hover:border-indigo-100">
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-xs">
-                                            {link.store[0]}
-                                        </div>
-                                        <div>
-                                            <p className="font-semibold text-slate-900">{link.store}</p>
-                                            <p className="text-xs text-slate-400">
-                                                Search for "{result.name}"
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <span className={`text-sm font-medium ${link.color}`}>View</span>
-                                        <ExternalLink
-                                            className="w-4 h-4 text-slate-300 group-hover:text-indigo-600 transition-colors" />
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-
-                    {/* Action Button */}
-                    <div className="mt-auto pt-6">
                         <button onClick={resetApp}
-                            className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
-                            <RotateCcw className="w-4 h-4" />
-                            Scan Another Item
+                            className="absolute top-4 left-4 p-2 bg-white/80 backdrop-blur rounded-full shadow-sm hover:bg-white z-20">
+                            <ArrowRight className="rotate-180 w-5 h-5 text-slate-700" />
                         </button>
+
+                        <div
+                            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 pt-24 z-20 md:hidden">
+                            <div className="flex justify-between items-start mb-1">
+                                <span className={`text-white text-xs font-bold px-2 py-1 rounded mb-2 inline-flex
+                                            items-center gap-1 ${isAiPowered ? 'bg-indigo-500' : 'bg-green-500'}`}>
+                                    {isAiPowered &&
+                                        <Sparkles size={10} />}
+                                    {result.confidence} MATCH
+                                </span>
+                            </div>
+                            <h2 className="text-white text-3xl font-bold leading-tight drop-shadow-sm">{result.name}
+                            </h2>
+                            <p className="text-slate-200 text-lg font-medium">{result.brand}</p>
+                        </div>
                     </div>
 
 
+                    {/* Content Side */}
+                    <div className="flex-1 p-6 md:p-12 md:pt-20 -mt-6 md:mt-0 rounded-t-3xl md:rounded-none bg-slate-50 relative z-10 flex flex-col gap-8 md:overflow-y-auto">
+
+                        {/* Desktop Header Info */}
+                        <div className="hidden md:block space-y-4">
+                            <div className="flex justify-between items-center">
+                                <span className={`text-white text-sm font-bold px-3 py-1.5 rounded inline-flex
+                                            items-center gap-2 ${isAiPowered ? 'bg-indigo-500' : 'bg-green-500'}`}>
+                                    {isAiPowered && <Sparkles size={14} />}
+                                    {result.confidence} MATCH
+                                </span>
+                                {isAiPowered && (
+                                    <span className="text-indigo-600 font-mono text-sm uppercase tracking-widest font-bold">
+                                        AI Analyzed
+                                    </span>
+                                )}
+                            </div>
+                            <h2 className="text-slate-900 text-5xl lg:text-6xl font-extrabold leading-tight">{result.name}</h2>
+                            <p className="text-slate-500 text-2xl font-medium">{result.brand}</p>
+                        </div>
+
+                        {/* Average Price Card */}
+                        <div
+                            className="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                            <div>
+                                <p className="text-sm md:text-base text-slate-500 mb-1">Estimated Market Value</p>
+                                <p className="text-3xl md:text-5xl font-black text-slate-900">{result.price}</p>
+                            </div>
+                            <div className="h-14 w-14 md:h-20 md:w-20 bg-indigo-50 rounded-full flex items-center justify-center">
+                                <ShoppingBag className="text-indigo-600 w-6 h-6 md:w-10 md:h-10" />
+                            </div>
+                        </div>
+
+
+                        {/* Retailers List */}
+                        <div>
+                            <h3 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+                                Find Online <span
+                                    className="text-xs md:text-sm font-normal text-slate-400 bg-slate-100 px-3 py-1 rounded-full">{realLinks.length}</span>
+                            </h3>
+                            <div className="space-y-4">
+                                {realLinks.map((link, idx) => (
+                                    <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer"
+                                        className="bg-white p-4 md:p-6 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between group cursor-pointer hover:border-indigo-100">
+                                        <div className="flex items-center gap-4 md:gap-6">
+                                            <div
+                                                className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-sm md:text-xl">
+                                                {link.store[0]}
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-slate-900 md:text-xl">{link.store}</p>
+                                                <p className="text-xs md:text-sm text-slate-400">
+                                                    Search for "{result.name}"
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                            <span className={`text-sm md:text-lg font-bold ${link.color}`}>View Store</span>
+                                            <ExternalLink
+                                                className="w-4 h-4 md:w-6 md:h-6 text-slate-300 group-hover:text-indigo-600 transition-colors" />
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+
+                        {/* Action Button */}
+                        <div className="mt-auto pt-8">
+                            <button onClick={resetApp}
+                                className="w-full bg-slate-900 text-white py-5 md:py-6 rounded-xl md:rounded-2xl font-bold text-lg md:text-xl flex items-center justify-center gap-3 hover:bg-slate-800 transition-all active:scale-95 shadow-lg">
+                                <RotateCcw className="w-5 h-5 md:w-6 md:h-6" />
+                                Scan Another Item
+                            </button>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         );
