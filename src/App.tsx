@@ -44,8 +44,6 @@ export default function App() {
     const [result, setResult] = useState<any>(null);
     const [cameraError, setCameraError] = useState(false);
     const [isAiPowered, setIsAiPowered] = useState(false);
-    const [showSettings, setShowSettings] = useState(false);
-    const [customKey, setCustomKey] = useState('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
@@ -102,10 +100,7 @@ export default function App() {
 
     // --- AI SCANNING LOGIC ---
     const analyzeImageWithGemini = async (base64Data: string) => {
-        // Prioritize custom key, fallback to env-provided apiKey.
-        const keyToUse = customKey || apiKey;
-
-        if (!keyToUse) {
+        if (!apiKey) {
             throw new Error("KEY_MISSING");
         }
 
@@ -120,7 +115,7 @@ export default function App() {
 
 
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${keyToUse}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -205,20 +200,13 @@ export default function App() {
 
                         // Handle specific key errors to help the user
                         if (apiErr.message === "KEY_MISSING") {
-                            setErrorMessage("Auto-injection failed: Key is missing. Please enter one in Settings.");
-                            setShowSettings(true);
+                            setErrorMessage("Gemini API key is missing. Please add it to your .env file as VITE_GEMINI_API_KEY.");
                             fatalError = "handled";
                         } else if (apiErr.message === "KEY_INVALID") {
-                            setErrorMessage("Auto-injected key is invalid. Please enter a valid key in Settings.");
-                            setShowSettings(true);
+                            setErrorMessage("Gemini API key is invalid. Please check your .env file.");
                             fatalError = "handled";
                         } else {
-                            // If user provided a custom key, DO NOT fallback silently. Show the error.
-                            if (customKey) {
-                                fatalError = apiErr.message || "Unknown API Error";
-                            } else {
-                                setIsAiPowered(false);
-                            }
+                            setIsAiPowered(false);
                         }
                     }
                 }
@@ -252,7 +240,7 @@ export default function App() {
                     }
                     setIsScanning(false);
                     // Only change view if we have a result
-                    if (aiResult || !customKey) {
+                    if (aiResult || !apiKey) {
                         setView('results');
                         stopCamera();
                     }
@@ -333,52 +321,8 @@ export default function App() {
                 </div>
 
 
-                {/* Settings Button */}
-                <button onClick={() => setShowSettings(true)}
-                    className="absolute top-6 right-6 z-50 p-2 bg-slate-800/50 backdrop-blur rounded-full
-                            hover:bg-slate-700 transition-colors"
-                >
-                    <Settings className="w-6 h-6 md:w-10 md:h-10 text-slate-300" />
-                </button>
 
 
-                {/* Settings Modal */}
-                {showSettings && (
-                    <div
-                        className="absolute inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-                        <div
-                            className="bg-slate-800 p-8 rounded-3xl w-full max-w-md border border-slate-700 shadow-xl">
-                            <div className="flex justify-between items-center mb-4">
-                                <h3 className="font-bold text-lg">App Settings</h3>
-                                <button onClick={() => setShowSettings(false)}>
-                                    <X size={20} />
-                                </button>
-                            </div>
-                            <div className="space-y-4">
-                                <div>
-                                    <label
-                                        className="block text-xs text-slate-400 mb-1 uppercase tracking-wider">Gemini
-                                        API Key</label>
-                                    <input type="password" value={customKey} onChange={(e) =>
-                                        setCustomKey(e.target.value)}
-                                        placeholder="Paste key to enable AI..."
-                                        className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm
-                                        focus:border-indigo-500 focus:outline-none transition-colors"
-                                    />
-                                    <p className="text-xs text-slate-500 mt-2">
-                                        Enter a valid Gemini Flash key. If blank, app uses demo mode.
-                                    </p>
-                                </div>
-                                <button onClick={() => setShowSettings(false)}
-                                    className="w-full bg-indigo-600 py-3 rounded-lg font-bold hover:bg-indigo-700
-                                        transition-colors"
-                                >
-                                    Save & Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
 
 
                 <div className="z-10 w-full max-w-md md:max-w-4xl lg:max-w-6xl flex flex-col h-full items-center">
